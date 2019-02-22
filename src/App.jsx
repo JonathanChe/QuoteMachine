@@ -29,17 +29,18 @@ class App extends Component {
   state = {
     quote: '',
     selected: '',
+    loading: false,
   }
 
   handleClick = async (e) => {
     const selected = e.target.name;
 
     if (selected === 'Ron Swanson') {
-      await this.setState({ selected });
+      await this.setState({ selected, loading: true });
       this.fetchRonSwanson();
     }
     else if (selected === 'Breaking Bad') {
-      await this.setState({ selected });
+      await this.setState({ selected, loading: true });
       this.fetchBreakingBad()
     }
     else {
@@ -50,19 +51,29 @@ class App extends Component {
   fetchBreakingBad = async () => {
     await fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes')
       .then(response => response.json())
-      .then(quote => this.setState({ quote: quote[0].quote }))
+      .then(quote => this.setState({
+        quote: quote[0].quote,
+        loading: false
+      }))
       .catch(() => displayError());
   }
 
   fetchRonSwanson = async () => {
     await fetch('https://ron-swanson-quotes.herokuapp.com/v2/quotes')
       .then(response => response.json())
-      .then(quote => this.setState({ quote: quote[0] }))
+      .then(quote => this.setState({
+        quote: quote[0],
+        loading: false,
+      }))
       .catch(() => displayError());
   }
 
   render() {
-    const { quote, selected } = this.state;
+    const {
+      quote,
+      selected,
+      loading
+    } = this.state;
 
     return (
       <View>
@@ -73,6 +84,7 @@ class App extends Component {
         <Quote
           quote={quote}
           selected={selected}
+          loading={loading}
         />
       </View>
     );
@@ -82,11 +94,13 @@ class App extends Component {
 App.propTypes = {
   quote: PropTypes.string.isRequired,
   selected: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
 }
 
 App.defaultProps = {
   quote: '',
   selected: '',
+  loading: false,
 }
 
 export default App;

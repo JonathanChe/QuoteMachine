@@ -9,12 +9,30 @@ const QuoteContainer = styled.div`
   align-items: center;
   color: black;
   font-size: 3rem;
+  text-align: center;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media only screen and (max-width: 420px) {
+    font-size: 1rem;
+  }
 `;
 
-const Quote = ({ quote, selected }) => (
+const Quote = ({ quote, selected, loading }) => (
   <QuoteContainer>
-    <h3> { selected ? `Selected: ${selected}` : ''}</h3>
-    <p> {quote ? quote : ''} </p>
+    {loading ?
+      (
+      <p>Fetching...</p>
+      )
+      : (
+        <div>
+          <h3> { selected ? `Selected: ${selected}` : ''}</h3>
+          <p> {quote ? quote : ''} </p>
+        </div>
+      )
+    }
   </QuoteContainer>
 );
 
