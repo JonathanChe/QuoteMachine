@@ -214,10 +214,6 @@ const CoolQuote = styled.div`
       font-size: 18px;
     }
   }
-
-  @media screen and (min-width: 754px) {
-    
-  }
 `;
 
 const Quote = ({ quote, selected, loading }) => (
