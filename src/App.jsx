@@ -19,6 +19,10 @@ const View = styled.main`
   height: 100%;
   width: 100vw;
   display: flex;
+
+  @media screen and (min-width: 280px) and (max-width: 756px) {
+    flex-flow: column wrap;
+  }
 `;
 
 const displayError = () => {

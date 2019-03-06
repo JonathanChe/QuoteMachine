@@ -18,6 +18,12 @@ const Container = styled.div`
   @media only screen and (max-width: 420px) {
     font-size: 1rem;
   }
+
+  @media screen and (min-width: 280px) and (max-width: 756px) {
+    min-height: 50vh;
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 const QuoteContainer = styled.div`
@@ -26,6 +32,10 @@ const QuoteContainer = styled.div`
   display: block;
   position: relative;
   overflow: hidden;
+
+  @media screen and (min-width: 280px) {
+    height: 50vh;
+  }
 `;
 
 const ImgContainer = styled.div`
@@ -38,7 +48,7 @@ const ImgContainer = styled.div`
   img {
     -webkit-filter: drop-shadow(-4px 5px 5px rgba(0,0,0,0.6));
     filter: drop-shadow(-4px 5px 5px rgba(0,0,0,0.6));
-    height: 200px;
+    height: 175px;
     animation: image-slide 4s cubic-bezier(.5,.5,0,1);
     animation-fill-mode: forwards;
   }
@@ -52,6 +62,9 @@ const ImgContainer = styled.div`
   }
 
   @media screen and (min-width: 1000px) {
+    img {
+      height: 150px;
+    }
     @keyframes image-slide {
       0% {
         transform: translatex(-250px) scale(0);
@@ -86,6 +99,12 @@ const ImgContainer = styled.div`
   }
 
   @media screen and (max-width: 450px) {
+    left: 65%;
+
+    img {
+      height: 100px;
+    }
+
     @keyframes image-slide {
       0% {
         transform: translatex(-80px) scale(0);
@@ -110,6 +129,7 @@ const CoolQuote = styled.div`
   transform: translate(-50%,-50%);
   z-index: 1;
   margin-left: -100px;
+  font-style: italic;
 
   p {
     font-size: 24px;
@@ -186,6 +206,14 @@ const CoolQuote = styled.div`
       }
     }
   }
+
+  @media screen and (min-width:280px) and (max-width: 530px) {
+    left: 65%;
+
+    p {
+      font-size: 18px;
+    }
+  }
 `;
 
 const Quote = ({ quote, selected, loading }) => (
@@ -196,9 +224,11 @@ const Quote = ({ quote, selected, loading }) => (
       )
       : (
         <QuoteContainer>
-          <ImgContainer>
-            <img src="https://purepng.com/public/uploads/large/purepng.com-curtainscurtainsdrapepiece-of-clothcovering-1701527923445lk8ec.png" alt="curtains-icon" />
-          </ImgContainer>
+          {selected && (
+            <ImgContainer>
+              <img src="https://purepng.com/public/uploads/large/purepng.com-curtainscurtainsdrapepiece-of-clothcovering-1701527923445lk8ec.png" alt="curtains-icon" />
+            </ImgContainer>)
+          }
           <CoolQuote>
             <p> { selected ? `Selected: ${selected}` : 'Pick one!'}</p>
             <p> {quote ? quote : ''} </p>

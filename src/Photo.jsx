@@ -10,6 +10,11 @@ const ImgBackground = styled.div`
   background-position: center center;
   height: 100vh;
   width: 60%;
+
+  @media screen and (min-width: 280px) and (max-width: 756px) {
+    width: 100%;
+    height: 50vh;
+  }
 `;
 
 const QuoteContainer = styled.div`
